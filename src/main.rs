@@ -1,5 +1,7 @@
 mod handlers;
 mod utils;
+
+use std::os::linux::raw::stat;
 use crate::utils::api::responses::BodyBuilder;
 use actix_web::web::Data;
 use actix_web::{get, App, HttpResponse, HttpServer};
@@ -19,6 +21,9 @@ async fn main() -> std::io::Result<()> {
         shortener_url: std::env::var("SHORTENER_URL").unwrap(),
         db_client: PgPoolOptions::new().max_connections(10).connect(&db_url).await.unwrap()
     });
+
+    sqlx::migrate!("./migrations").run(&state.db_client).await.expect("Could not run migrations.");
+
     HttpServer::new(move || {
         App::new()
             .app_data(state.clone())
