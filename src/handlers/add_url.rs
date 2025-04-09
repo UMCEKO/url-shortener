@@ -12,7 +12,7 @@ struct NewUrlBody {
     shortened_url: Option<String>
 }
 
-#[post("/new-url")]
+#[post("/add-url")]
 async fn add_url(Json(body): Json<NewUrlBody>, state: Data<AppState>) -> HttpResponse {
     let shortened_url = body.shortened_url.unwrap_or(String::from(generate_random_string(5)));
     let result = sqlx::query!(r#"INSERT INTO links(target_url, shortened_url) VALUES ($1, $2)"#, body.link, shortened_url).fetch_all(&state.db_client).await;

@@ -13,7 +13,7 @@ pub struct AppState {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    dotenv::dotenv().expect("TODO: panic message");
+    dotenv::dotenv().expect("Dotenv failed to initialize.");
     let db_url = std::env::var("DATABASE_URL").expect("Expected DATABASE_URL environment variable to be set.");
     let state = Data::new(AppState {
         shortener_url: std::env::var("SHORTENER_URL").unwrap(),

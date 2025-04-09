@@ -1,0 +1,14 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "DELETE FROM links WHERE shortened_url = $1",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "adb9e5c441039531c5b0e8b570080a2c8e8baa74ee45bf6268eb90be94f0f8a8"
+}
