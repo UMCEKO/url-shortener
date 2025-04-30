@@ -3,6 +3,7 @@ WORKDIR /app
 COPY . .
 RUN cargo build --release
 
+
 FROM rust as runner
 WORKDIR /app
 COPY --from=builder /app/target/release/url-shortener /app/
