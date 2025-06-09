@@ -50,7 +50,7 @@ async fn main() -> std::io::Result<()> {
     let env_vars = match get_env_vars() {
         Ok(vars) => vars,
         Err(_) => {
-            dotenv::dotenv().expect("Dotenv failed to initialize.");
+            dotenv::dotenv().ok();
             get_env_vars().expect("Say whaat")
         }
 
